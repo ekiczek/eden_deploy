@@ -51,7 +51,7 @@ echo using hostname $pubDNS
 # Install ansible dependencies
 if [ $DEBIAN == '12' ]; then
     apt-get update
-    apt-get install ansible
+    apt-get install ansible -qy
 elif [ $DEBIAN == '11' ]; then
     update-alternatives --install /usr/bin/python python /usr/bin/python3.9 1
     apt-get remove python3-jinja2 python3-yaml -qy
