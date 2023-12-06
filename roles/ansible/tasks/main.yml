@@ -49,11 +49,11 @@
 #   become: yes
 
 # Needed for 'dig' lookup
-- name: Install DNSPython
-  pip:
-    name: dnspython
-    extra_args: --upgrade
-  become: yes
+# - name: Install DNSPython
+#   pip:
+#     name: dnspython
+#     extra_args: --upgrade
+#   become: yes
 
 - name: Install YAML # full_load method
   pip:
