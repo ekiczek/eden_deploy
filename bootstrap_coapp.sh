@@ -11,7 +11,8 @@ if [ -f /sys/hypervisor/uuid ]; then
   # File should be readable by non-root users.
   if [ `head -c 3 /sys/hypervisor/uuid` == "ec2" ]; then
     echo running on EC2
-    pubDNS=`wget --quiet -O - http://169.254.169.254/latest/meta-data/public-hostname`
+    TOKEN=`curl -s -X PUT "http://169.254.169.254/latest/api/token" -H "X-aws-ec2-metadata-token-ttl-seconds: 21600"`
+    pubDNS=`curl -s http://169.254.169.254/latest/meta-data/public-hostname -H "X-aws-ec2-metadata-token: $TOKEN"`
   else
     echo not running on EC2
     read -d . pubDNS < /etc/hostname
@@ -48,7 +49,10 @@ fi
 echo using hostname $pubDNS
 
 # Install ansible dependencies
-if [ $DEBIAN == '11' ]; then
+if [ $DEBIAN == '12' ]; then
+    apt-get update
+    apt-get install ansible
+elif [ $DEBIAN == '11' ]; then
     update-alternatives --install /usr/bin/python python /usr/bin/python3.9 1
     apt-get remove python3-jinja2 python3-yaml -qy
     apt-get install python3-pip python3-dev -qy
@@ -61,10 +65,10 @@ else
     apt-get install python-pip python-dev -qy
 fi
 
-pip install PyYAML jinja2 paramiko -q
+# pip install PyYAML jinja2 paramiko -q
 
 # Install Ansible
-pip install ansible -q
+# pip install ansible -q
 
 # Build Playbook
 cat << EOF > "deploy_coapp.yml"
@@ -87,4 +91,4 @@ EOF
 echo "Now running ansible-playbook"
 
 # HOME=/root required due to https://github.com/ansible/ansible/issues/21562
-HOME=/root /usr/local/bin/ansible-playbook -i inventory deploy_coapp.yml
+HOME=/root /usr/bin/ansible-playbook -i inventory deploy_coapp.yml
