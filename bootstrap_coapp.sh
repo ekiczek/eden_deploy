@@ -54,6 +54,7 @@ if [ $DEBIAN == '12' ]; then
     apt-get install ansible -qy
     apt-get install pip -qy
     apt-get install python3-tk -qy
+    apt-get install python3-lxml -qy
 elif [ $DEBIAN == '11' ]; then
     update-alternatives --install /usr/bin/python python /usr/bin/python3.9 1
     apt-get remove python3-jinja2 python3-yaml -qy
