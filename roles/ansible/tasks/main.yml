@@ -55,11 +55,11 @@
 #     extra_args: --upgrade
 #   become: yes
 
-- name: Install YAML # full_load method
-  pip:
-    name: PyYAML>5.1
-    extra_args: --upgrade
-  become: yes
+# - name: Install YAML # full_load method
+#   pip:
+#     name: PyYAML>5.1
+#     extra_args: --upgrade
+#   become: yes
 
 - name: Install Jinja2
   pip:
