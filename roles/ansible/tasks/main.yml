@@ -61,14 +61,14 @@
 #     extra_args: --upgrade
 #   become: yes
 
-- name: Install Jinja2
-  pip:
-    name: jinja2
-    extra_args: --upgrade
-  become: yes
+# - name: Install Jinja2
+#   pip:
+#     name: jinja2
+#     extra_args: --upgrade
+#   become: yes
 
-- name: Install Ansible
-  pip:
-    name: ansible
-    extra_args: --upgrade
-  become: yes
+# - name: Install Ansible
+#   pip:
+#     name: ansible
+#     extra_args: --upgrade
+#   become: yes
