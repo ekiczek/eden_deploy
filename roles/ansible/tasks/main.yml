@@ -22,31 +22,31 @@
   become: yes
 
 # @ToDo: Separate to debian.yml
-- name: Uninstall OS' Python packages
-  apt:
-    name: ['python-boto',
-           'python3-boto',
-           'python3-botocore',
-           # Done in user-data.sh
-           #'python3-jinja2',
-           #'python3-yaml',
-           ]
-    state: absent
-    # Uninstalls' Python2 on current Marketplace Buster which then stops install
-    #autoremove: yes
-  become: yes
+# - name: Uninstall OS' Python packages
+#   apt:
+#     name: ['python-boto',
+#            'python3-boto',
+#            'python3-botocore',
+#            # Done in user-data.sh
+#            #'python3-jinja2',
+#            #'python3-yaml',
+#            ]
+#     state: absent
+#     # Uninstalls' Python2 on current Marketplace Buster which then stops install
+#     #autoremove: yes
+#   become: yes
 
-- name: Install Boto # Want latest version to know about all regions
-  pip:
-    name: boto
-    extra_args: --upgrade
-  become: yes
+# - name: Install Boto # Want latest version to know about all regions
+#   pip:
+#     name: boto
+#     extra_args: --upgrade
+#   become: yes
 
-- name: Install Boto3
-  pip:
-    name: boto3
-    extra_args: --upgrade
-  become: yes
+# - name: Install Boto3
+#   pip:
+#     name: boto3
+#     extra_args: --upgrade
+#   become: yes
 
 # Needed for 'dig' lookup
 - name: Install DNSPython
